@@ -117,10 +117,16 @@ void display(Node* head){
 
 //search element
 //1 2 3 4 5
-int search(Node* head, int pos){
+// int search(Node* head, int pos){
+//     if(head == nullptr) return -1;
+//     if(pos == 1) return head->data; //not found
+//     return search(head->next, pos-1);
+// }
+
+int search(Node* head, int value, int pos = 1){
     if(head == nullptr) return -1;
-    if(pos == 1) return head->data; //not found
-    return search(head->next, pos-1);
+    if(head->data == value) return pos;
+    return search(head->next, value, ++pos);
 }
 
 int main()
@@ -133,8 +139,9 @@ int main()
     AddElementAtPosition(head, 4, 4);
     DeleteElementAtPosition(head, 4);
     display(head);
-    int pos = 2;
-    int val = search(head, pos);
-    cout <<"Value at position "<< pos << " is : " << val << endl;
+    int val = 10;
+    int pos = search(head, val);
+    if(pos == -1) cout <<"Value not found..!"<< endl;
+    else cout <<"Value at position "<< pos << endl;
     return 0;
 }
