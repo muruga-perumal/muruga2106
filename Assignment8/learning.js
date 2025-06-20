@@ -187,15 +187,6 @@ const obj = {
 // fu();
 
 
-function Entity(fname, lname, age){
-    this.fname = fname;
-    this.lname = lname;
-    this.age = age;
-}
-
-Entity.prototype.greet = () => {
-    console.log("Hello world..!");
-}
 
 let ob = new Entity('muruga', 'perumal', 20);
 // Object.assign(target, source)
@@ -211,16 +202,98 @@ const ob3 = Object.fromEntries(entries);
 const arr = Object.entries(ob);
 
 // const people = [
-//     { name: 'Alice', age: 21 },
-//     { name: 'Bob', age: 25 },
-//     { name: 'Charlie', age: 21 },
-//   ];
-  
-//   const grouped = people.groupBy(person => person.age);
-  
-//   console.log(grouped);
+    //     { name: 'Alice', age: 21 },
+    //     { name: 'Bob', age: 25 },
+    //     { name: 'Charlie', age: 21 },
+    //   ];
+    
+    //   const grouped = people.groupBy(person => person.age);
+    
+    //   console.log(grouped);
+    
+    
+function Entity(fname, lname, age){
+    this.fname = fname;
+    this.lname = lname;
+    this.age = age;
+}
+
+Entity.prototype.greet = () => {
+    console.log("Hello world..!");
+}
+
+const mur = new Entity('muruga','perumal', 20);
+
+
+const hello = Object.create(mur);
+
+// hello.greet();
+
+// console.log(Entity.prototype)
+
+
+function Animal(){
+    this.name = "animal"
+}
+
+Animal.prototype.speak = function(){
+    console.log("Hello from", this.name);
+}
+
+function Dog(){
+    this.name = "Dog";
+}
+
+Dog.prototype = {
+    __proto__ : Animal.prototype
+}
+
+let animal = new Animal();
+let dog = new Dog();
+
+// console.log(Animal.prototype.__proto__);
+// dog.speak();
+// console.log(animal.speak)
+
+
+let user = {
+    name: "muruga"
+}
+
+// let newuser = Object.create(user);
+
+let newuser = {
+    __proto__ : {
+        ...user
+    }
+}
+
+// console.log(newuser.__proto__)
 
 
 
+//array methods..
 
+let array = [];
+let array2 = [1,2,3,4,5];
 
+// console.log(array.length);
+
+array.push(1);
+array.push({name:"muruga"});
+
+// console.log(array.toString());
+
+// console.log(array.at(1));
+
+array.shift();
+// array.unshift(...array)
+
+// array = array.concat(array2);
+
+array2 = array2.copyWithin(1, 0, 5);
+
+// array.delete(2);
+
+console.log(array2);
+// console.log(array.join('|'));
