@@ -35,7 +35,7 @@ Timeout 3 */
 
 console.log("begin")
 
-// it will run after promise 2 because the event loop starts at idle phase the immediate call backs will be passed to check phase
+// it will run after timer - check queue.. if some task needs to run after poll or io operation we can use setImmediate..
 for(let i = 1 ; i <= 5 ; i++){
     setImmediate(()=>{
         console.log("immediate")
@@ -54,9 +54,9 @@ setTimeout(()=>{
     }).then(()=>{
         console.log("check1");
     })
-},100)
+},0)
 
-//has the highest priority- it is a microtask
+//has the highest priority next to process.nextTick()- it is a microtask
 Promise.resolve().then(()=>{
     console.log("promise 2");
     setTimeout(()=>{
@@ -67,7 +67,7 @@ Promise.resolve().then(()=>{
     console.log("check2");
 })
 
-//execute immediately after promises.. 
+//execute immediately.. 
 for(let i = 1 ; i <= 5 ; i++){
     process.nextTick(()=>{
         console.log("Hello world");
@@ -89,13 +89,13 @@ Hello world
 Hello world
 promise 2
 check2
-immediate
-immediate
-immediate
-immediate
-immediate
 Timeout 1
 Promise 1
 check1
-timout 3
-timeout 2 */
+immediate
+immediate
+immediate
+immediate
+immediate
+timeout 2
+timout 3 */
